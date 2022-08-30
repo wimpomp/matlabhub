@@ -1,0 +1,17 @@
+[Unit]
+Description=Matlab web server
+After=network-online.target firewalld.service
+Wants=network-online.target
+
+[Service]
+User=matlab-user
+Type=simple
+ExecStart=/usr/local/bin/gunicorn --bind unix:/tmp/matlabhub.sock matlabhub.wsgi:application
+ExecStop=/bin/kill -s STOP $MAINPID
+ExecReload=/bin/kill -s HUP $MAINPID
+TimeoutSec=0
+RestartSec=2
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

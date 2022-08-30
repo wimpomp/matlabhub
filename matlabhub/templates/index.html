@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <style>
+            .block {
+                padding: 5px;
+                margin: 5px;
+                display: inline-block;
+                border: 5px solid #193f6f;
+                text-align: center;
+                }
+        </style>
+        <title>Matlab Hub</title>
+    </head>
+    <body>
+        <div class="block" align="center">
+            <h1>Matlab Hub</h1>
+            <br />
+            <h4>Start new matlab in group:</h4>
+            <form method="POST" target="_blank">
+                <input name="group" value="{{group}}">
+                <input type="submit" value="start">
+            </form>
+            <br />
+            <h4>Groups:</h4>
+            {% for group in groups %}
+                <a href="/{{group}}">{{group}}</a><br />
+            {% endfor %}
+            <h4>Matlabs in group {{group}}:</h4>
+            {% for port in ports %}
+                <a href="/{{port}}" target="_blank">{{port}}</a> <a href="/{{group}}/stop/{{port}}">stop</a><br />
+            {% endfor %}
+            <br />
+            <a href="https://github.com/wimpomp/matlabhub">Matlab Hub</a> by Wim Pomp
+        </div>
+    </body>
+</html>
