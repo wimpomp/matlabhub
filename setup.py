@@ -19,7 +19,7 @@ setuptools.setup(
         'Operating System :: OS Independent',
     ],
     python_requires='>=3.8',
-    install_requires=['matlab-proxy', 'flask'],
+    install_requires=['matlab-proxy', 'flask', 'gunicorn', 'pyyaml'],
     entry_points={'console_scripts': ['matlabhub=matlabhub:main'], },
     package_data={'': ['templates/*', 'config.yml']},
     include_package_data=True,
