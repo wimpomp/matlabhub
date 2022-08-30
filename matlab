@@ -4,10 +4,6 @@ server {
 	listen 8585 default_server;
 	listen [::]:8585 default_server;
 
-	root /var/www/html;
-
-	index index.html;
-
 	server_name _;
 
 	location ~ ^/([0-9]+) {
