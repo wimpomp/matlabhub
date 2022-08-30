@@ -39,13 +39,13 @@ class Hub(dict):
         super().__init__()
         self.update({matlab.port: matlab for matlab in self.find_running()})
 
-
-    def find_running(self):
+    @staticmethod
+    def find_running():
         p = subprocess.run('screen -list', shell=True, capture_output=True)
         return [Matlab(port, group) for group, port in re.findall(r'\.matlab_([^_]+)_(\d+)', str(p.stdout))]
 
     def new(self, group=None):
-        group = re.escape(re.sub(r'[^\w]|_', '', group))
+        group = re.escape(re.sub(r'\W|_', '', group))
         ports = list(range(*config['port_range']))
         random.shuffle(ports)
         for port in ports:
