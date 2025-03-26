@@ -6,7 +6,7 @@ Wants=network-online.target
 [Service]
 User=matlab-user
 Type=simple
-ExecStart=/usr/local/bin/gunicorn --bind unix:/tmp/matlabhub.sock matlabhub.app:app
+ExecStart=/opt/matlabhub/venv/bin/gunicorn --bind unix:/tmp/matlabhub.sock matlabhub.app:app
 ExecStop=/bin/kill -s STOP $MAINPID
 ExecReload=/bin/kill -s HUP $MAINPID
 TimeoutSec=0

@@ -1,12 +1,13 @@
 import os
-import sys
+import random
 import re
 import socket
 import subprocess
-import random
+import sys
+from time import sleep
+
 import yaml
 from flask import Flask, redirect, render_template, request
-from time import sleep
 
 with open(os.path.join(os.path.dirname(__file__), 'config.yml')) as conf_file:
     config = yaml.safe_load(conf_file)
@@ -25,7 +26,9 @@ class Matlab:
 
     def start(self):
         command = f'screen -S {self.screen_name} -d -m env MWI_BASE_URL="/{self.port}" ' \
-                  f'MWI_APP_PORT={self.port} MLM_LICENSE_FILE={config["license_file"]} matlab-proxy-app'
+                  f'MWI_APP_PORT={self.port} MLM_LICENSE_FILE={config["license_file"]} ' \
+                  'MWI_ENABLE_TOKEN_AUTH="False" ' \
+                  f'{config["matlab-proxy-app"]}'
         subprocess.Popen(command, shell=True, start_new_session=True)
 
     def stop(self):
